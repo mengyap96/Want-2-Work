@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+  <% include ../partials/nav.ejs %>
+  <%if(error==true){%>
+    <script>alert("Session invalid!\nPlease log in again!");</script>
+  <%}else if(error==4){ %>
+    <script>alert("Please wait for approval from admin to post a job!");</script>
+  <%}else if(error==5){ %>
+    <script>alert("Your account approval are rejected!\nPlease contact admin for more info!");</script>
+  <%}%>
+  <div >
+    <h1 style="position: static; font-size:54px ; text-align:center; margin-top: 10%;">
+      Want<span style="color: #4c96d7;"> 2 </span> Work <br>
+      <form action="/job-list" method="post">
+        <input  class="search-bar" type="search" name="key" placeholder="Search here" 
+        style="width:40%; height: 5rem; margin-top: 20px; border-radius:7px; border-style:solid;border-color:grey; padding:1rem; font-size:40px ">
+
+        <button class=" btn-primary search-bar" type="submit"
+        style="background-color:#4c96d7 ;border-color: #4c96d7;font-size: 40px;height: 5rem;">&ensp;Search&ensp;</button>
+      </form>
+    </p>
+  </div>
+  
+</body>
+</html>

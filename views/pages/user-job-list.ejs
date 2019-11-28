@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../partials/header.ejs %>
+</head>
+<body>
+    <% include ../partials/nav.ejs %>
+    <div class="row justify-content-end my-3">
+        <a class="col-1"  href="/"><i class="fa fa-chevron-circle-left fa-lg" style="color:#4c96d7" aria-hidden="true">Back</i></a>
+      </div>
+    <!-- job list -->
+      <div class="list-group mb-5" >
+
+          <%if(jobs.length==0){%>
+            
+            <a  class="list-group-item list-group-item-action  flex-column align-items-start my-1 shadow-sm" style="border-radius: 15px;">
+              
+              <div class="row justify-content-center">
+                  <h1 class="p-1" >No apply any job yet!</h1>
+              </div>
+              
+              
+                 
+              
+            </a>
+            <%}%>
+
+        <%for(i=0;i<jobs.length;i++){%>
+          
+        <div href="/user-job-detail/<%=jobs[i].jobId%>" class="list-group-item flex-column align-items-start my-1 shadow-sm" style="border-radius: 15px;">
+          <div class="d-flex w-100 justify-content-between">
+            <a href="/job-detail/<%= jobs[i].jobId %>" style="font-size:40px; color:#4c96d7; text-decoration: none;" ><%=jobs[i].jobTitle%></a>
+            <%if(jobs[i].jobStatus.status=="Pending") {%>
+              <a style="color: gray;"><%=jobs[i].jobStatus.status%></a>
+            <% }else if(jobs[i].jobStatus.status=="Interview") {%>
+              <a style="color: orange;"><%=jobs[i].jobStatus.status%></a>
+            <% }else if(jobs[i].jobStatus.status=="Accepted") {%>
+              <a style="color: green;"><%=jobs[i].jobStatus.status%></a>
+            <% }else if(jobs[i].jobStatus.status=="Rejected") {%>
+              <a style="color: red;"><%=jobs[i].jobStatus.status%></a>
+            <% }else if(jobs[i].jobStatus.status=="Finished") {%>
+              <a style="color: black;"><%=jobs[i].jobStatus.status%></a>
+            <%} %>
+            
+          </div>
+          
+          <a href="/company-profile/<%= jobs[i].companyDetail[0].email %>" style="color:black; text-decoration: none;" class="mb-1"><%=jobs[i].companyDetail[0].name%></a><br>
+          <a class="text-muted "><i class="fa fa-map-marker fa-lg" style="color:#4c96d7" aria-hidden="true"></i>&emsp;&ensp;&nbsp;<%=jobs[i].jobLocation%>, <%=jobs[i].jobCity%></a><br>
+          <a class="text-muted "><i class="fa fa-usd fa-lg" style="color:#85bb65 " aria-hidden="true"></i>&emsp;&ensp;<%=jobs[i].jobSalary%> per hour</a><br>
+          <a class="text-muted "><i class="fa fa-calendar-o fa-lg" style="color:red " aria-hidden="true"> </i>&emsp;<%= moment(jobs[i].jobStart).format("DD-MM-YYYY") %> &rarr; <%= moment(jobs[i].jobEnd).format("DD-MM-YYYY") %></a>
+          
+          <%if((jobs[i].jobStatus.status=="Finished")&&(jobs[i].jobStatus.ratedCompany==false)){%>
+            <br><a href="/rate-company?e=<%=jobs[i].companyEmail%>&j=<%=jobs[i].jobId%>"><i class="fa fa-check" aria-hidden="true">&ensp;</i>Job Done! Rate the company now!</a>
+            
+            <%}else if(jobs[i].jobStatus.status=="Pending"){%>
+            <br><a href="/cancel-job/<%=jobs[i].jobId%>"><i class="fa fa-ban" aria-hidden="true">&ensp;</i>Cancel Job</a>
+            
+            <%}else if(jobs[i].jobStatus.status=="Interview"){%>
+              <br><a href="/cancel-job/<%=jobs[i].jobId%>"><i class="fa fa-ban" aria-hidden="true">&ensp;</i>Cancel Job</a>
+            <%}%>
+          </div>
+          
+
+        <%}%>
+      </div>
+
+
+  </body>
+  </html>
+  

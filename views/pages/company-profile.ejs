@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+  <% include ../partials/nav.ejs %>
+
+
+
+
+  <div class="container">
+    
+    <div class="row">
+    <div class="col-lg"></div> 
+      <div class="card col-lg-6 shadow-lg my-5 p-5" style="border-radius:10px">
+
+        <div class="row justify-content-end">
+          <button class="col-1 btn btn-outline-dark"  style="border-color:white;" onclick="window.history.back()"><i class="fa fa-times fa-lg" aria-hidden="true"></i></button>
+        </div>  
+
+        <div class="row justify-content-md-center">
+            <h1><i class="fa fa-building-o fa-4x" aria-hidden="true" style="color:#4c96d7"></i></h1>
+          </div>
+        
+        <div class="row justify-content-md-center mt-3">
+          <h1><%=user[0].name%></h1>
+        </div>
+
+        <a href="/user-rating/<%=user[0].email%>" style="color:black; text-decoration: none;">
+        <%if(user[0].rating>4.5){%>
+
+        
+        <div class="row justify-content-md-center mb-4">
+            <span class="fa fa-star fa-2x checked"></span>
+            <span class="fa fa-star fa-2x checked"></span>
+            <span class="fa fa-star fa-2x checked"></span>
+            <span class="fa fa-star fa-2x checked"></span>
+            <span class="fa fa-star fa-2x checked"></span>
+        </div>
+        <%}else if(user[0].rating>3.5){%>
+          <div class="row justify-content-md-center mb-4">
+              <span class="fa fa-star fa-2x checked"></span>
+              <span class="fa fa-star fa-2x checked"></span>
+              <span class="fa fa-star fa-2x checked"></span>
+              <span class="fa fa-star fa-2x checked"></span>
+              <span class="fa fa-star fa-2x "></span>
+          </div>
+        <%}else if(user[0].rating>2.5){%>
+          <div class="row justify-content-md-center mb-4">
+              <span class="fa fa-star fa-2x checked"></span>
+              <span class="fa fa-star fa-2x checked"></span>
+              <span class="fa fa-star fa-2x checked"></span>
+              <span class="fa fa-star fa-2x"></span>
+              <span class="fa fa-star fa-2x "></span>
+          </div>
+        <%}else if(user[0].rating>1.5){%>
+          <div class="row justify-content-md-center mb-4">
+              <span class="fa fa-star fa-2x checked"></span>
+              <span class="fa fa-star fa-2x checked"></span>
+              <span class="fa fa-star fa-2x "></span>
+              <span class="fa fa-star fa-2x "></span>
+              <span class="fa fa-star fa-2x "></span>
+          </div>
+        <%}else if(user[0].rating>0.5){%>
+          <div class="row justify-content-md-center mb-4">
+              <span class="fa fa-star fa-2x checked"></span>
+              <span class="fa fa-star fa-2x "></span>
+              <span class="fa fa-star fa-2x "></span>
+              <span class="fa fa-star fa-2x "></span>
+              <span class="fa fa-star fa-2x "></span>
+          </div>
+        <%}else{%>
+          <div class="row justify-content-md-center mb-4">
+              <span class="fa fa-star fa-2x "></span>
+              <span class="fa fa-star fa-2x "></span>
+              <span class="fa fa-star fa-2x "></span>
+              <span class="fa fa-star fa-2x "></span>
+              <span class="fa fa-star fa-2x "></span>
+          </div>
+        <%}%>
+      </a>
+
+        
+     
+
+        <div class="row">
+            <div class="input-group input-group-lg mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Email&emsp;&emsp;&emsp;&ensp;</span>
+                </div>
+                <input type="text" class="form-control" style="color:black;background-color: white;" value="<%=user[0].email%>" aria-label="Username" aria-describedby="basic-addon1" disabled />
+              </div>
+        </div>
+
+        <div class="row">
+            <div class="input-group input-group-lg mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Phone&emsp;&emsp;&emsp;</span>
+                </div>
+                <input type="text" class="form-control" style="color:black;background-color: white;" value="<%=user[0].phone%>" aria-label="Username" aria-describedby="basic-addon1" disabled />
+              </div>
+        </div>
+
+        <div class="row">
+            <div class="input-group input-group-lg mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Address&emsp;&emsp;&nbsp;</span>
+                </div>
+                <textarea type="text" class="form-control" style="color:black;background-color: white;" value="<%=user[0].address%>" aria-label="Username" aria-describedby="basic-addon1" disabled ><%=user[0].address%></textarea>
+              </div>
+        </div>
+
+        <div class="row">
+            <div class="input-group input-group-lg mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">About&emsp;&emsp;&emsp;</span>
+                </div>
+                <input type="text" class="form-control" style="color:black;background-color: white;" value="<%=user[0].about%>" aria-label="Username" aria-describedby="basic-addon1" disabled />
+              </div>
+        </div>
+
+        
+        
+
+        
+        <% if(id==email){ %>
+        <div class="row justify-content-md-center">
+            <a class="btn btn-primary" style="border-radius: 40px; border-color:#4c96d7 ; background-color:#4c96d7; font-size:25px" href="/edit-profile">Edit Profile</a>
+          </div>
+        <% } %>
+      </div>
+      <div class="col-lg"></div> 
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+  <% include ../partials/nav.ejs %>
+  <div class="container">
+    <div class="row">
+        <div class="col-lg"></div>
+
+  
+    <form class="card col-lg-6 shadow-lg my-5 p-5" style="border-radius: 15px;" action="/update-profile-button" method="post" onsubmit="return checkSpam(this.name.value,this.phone.value,this.address.value,this.about.value)" >
+      <div class="row justify-content-md-center">
+          <h1>Edit Profile</h1>
+        </div>
+      
+      
+      <div class="form-group">
+        <label for="name">Name</label><br>
+        <input class="form-control" type="text" name="name" value="<%=user[0].name%>" required>
+      </div>
+      
+      <%if(userType=="user"){%>
+      <div class="form-group">
+        <label for="genderSelect">Gender</label><br>
+        <select class="form-control" name="gender" value="<%=user[0].gender%>">
+          <option>Male</option>
+          <option>Female</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+          <label for="name">Date of Birth</label><br>
+          <input class="form-control" type="date" name="DOB" value="<%=DOB%>" required>
+        </div>
+      
+        <%}%>
+
+        <div class="form-group">
+            <label for="name">Phone</label><br>
+            <input class="form-control" type="tel" name="phone" value="<%=user[0].phone%>">
+          </div>
+
+        <div class="form-group">
+            <label for="name">About</label><br>
+            <textarea class="form-control" type="text" name="about" value="<%=user[0].about%>"  ><%=user[0].about%></textarea>
+          </div>
+
+        <div class="form-group">
+            <label for="name">Adress</label><br>
+            <textarea class="form-control" type="text" name="address" value="<%=user[0].address%>"  ><%=user[0].address%></textarea>
+          </div>
+      
+          <div class="row mt-2">
+              <div class="col-md"></div>
+            <div class="col-md text-center">
+                <button class="form-control btn-primary m-2 px-4 py-2" style="font-family: 'Times New Roman', Times, serif; font-size:25px; border-radius: 40px; border-color:#4c96d7; background-color:#4c96d7" type="submit" >Save</button>
+            </div>
+            <div class="col-md text-center">
+                <a href="/user-profile/<%= user[0].email%>" class="btn form-control m-2 px-4 py-2" id="cancel-button" type="submit" >Cancel</a>
+            </div>
+            <div class="col-md"></div>
+          </div>
+    </form>
+    <div class="col-lg"></div>
+  </div>
+  </div>
+
+  <script>
+      function checkSpam(name,phone,address,about){
+        if(Number.isInteger(Number(name))){
+          alert('Your name cannot be number only!');
+          return false;
+          }else if(!Number.isInteger(Number(phone))){
+            alert('Your phone can only consist of number!');
+            return false;
+          }else if(Number.isInteger(Number(address))){
+            alert('Your address cannot only consist of number!');
+            return false;
+          }else if(Number.isInteger(Number(about))){
+            alert('About cannot only consist of number!');
+            return false;
+          }
+          else{
+            return true;
+          }}
+    </script>
+</body>
+</html>

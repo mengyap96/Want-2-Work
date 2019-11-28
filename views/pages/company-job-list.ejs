@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../partials/header.ejs %>
+</head>
+<body>
+    <% include ../partials/nav.ejs %>
+    
+    <div class="row justify-content-end my-3">
+        <a class="col-1"  href="/"><i class="fa fa-chevron-circle-left fa-lg" style="color:#4c96d7" aria-hidden="true">Back</i></a>
+      </div>
+    <!-- job list -->
+      <ul class="list-group mb-5" >
+          
+          <%if(jobs.length==0){%>
+            <li href="" class="list-group-item list-group-item-action  flex-column align-items-start my-1 shadow-sm" style="border-radius: 15px;">
+              <div class="row justify-content-center">
+                  <h1 class="p-1" >No posted any job yet!</h1>
+              </div>
+            <%}else{%>
+
+        <%for(i=0;i<jobs.length;i++){%>
+          
+        <li  class="list-group-item  flex-column align-items-start my-1 shadow-sm" style="border-radius: 15px;">
+          <div class="d-flex w-100 justify-content-between">
+            <a class="mb-1" href="/job-detail/<%=jobs[i].jobId%>" style="font-size:40px; color:black"><%=jobs[i].jobTitle%></a>
+            
+          </div>
+          
+          <a class="text-muted"><i class="fa fa-map-marker fa-lg" style="color:#4c96d7" aria-hidden="true"></i>&emsp;&ensp;&nbsp;<%=jobs[i].jobLocation%>, <%=jobs[i].jobCity%></a><br>
+          <a class="text-muted"><i class="fa fa-usd fa-lg" style="color:#85bb65 " aria-hidden="true"></i>&emsp;&ensp;<%=jobs[i].jobSalary%> per hour</a><br>
+          <a class="text-muted"><i class="fa fa-calendar-o fa-lg" style="color:red " aria-hidden="true"> </i>&emsp;<%= moment(jobs[i].jobStart).format("DD-MM-YYYY") %> &rarr; <%= moment(jobs[i].jobEnd).format("DD-MM-YYYY") %></a><br>
+          
+          <%if(jobs[i].candidateEmail.length>0){%>
+            <a href="/view-candidate/<%=jobs[i].jobId%>"> <i class="fa fa-eye fa-lg" aria-hidden="true">&ensp;&nbsp;</i>View Candidate </a><span class="badge badge-primary badge-pill" ><%=jobs[i].candidateEmail.length%></span><br>
+          <%}else{%>
+            <a onclick="if(confirm('Are you sure to delete this job?')){return true;}else{return false;}" href="/delete-job/<%=jobs[i].jobId%>"><i class="fa fa-ban fa-lg" aria-hidden="true">&emsp;</i>Delete Job</a>
+          <% } %>
+        </li>
+
+        <%}}%>
+      </ul>
+
+      
+
+  </body>
+  </html>
+  

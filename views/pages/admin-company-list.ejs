@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../partials/header.ejs %>
+</head>
+<body>
+    <% include ../partials/nav.ejs %>
+
+    <div class="row justify-content-end mt-1">
+            <a class="col-lg-1 my-2"style="border-color:transparent;" href="/"><i class="fa fa-chevron-circle-left fa-lg" style="color:#4c96d7" aria-hidden="true">Back</i></a>
+
+    </div>
+    <ul class="list-group mb-5 " >
+            
+        <%if(users.length==0){%>
+                <li class="col list-group-item align-items-start my-1 shadow-sm" style="border-radius: 15px;">
+                    
+            <div class="row justify-content-center">
+                    <a style="font-size:40px; color:black; text-decoration:none; " class="mb-1" >No Pending Company</a><br>
+            </div>
+                </li>
+        <%}%>
+
+            <%for(i=0;i<users.length;i++){%>
+              
+            <li class="list-group-item align-items-start my-1 shadow-sm" style="border-radius: 15px;">
+                
+                <a style="font-size:40px; color:#4c96d7; text-decoration:none; " href="/company-profile/<%=users[i].email %>" class="mb-1"><%=users[i].name%></a><br>
+                
+                <a> <i class="fa fa-envelope-o fa-lg" aria-hidden="true" style="color:red"></i> &nbsp; <%=users[i].email%> </a><br>
+                <a> <i class="fa fa-phone fa-lg" aria-hidden="true" style="color:green"></i>&ensp;&ensp;<%=users[i].phone%> </a><br>
+                <a> <i class="fa fa-location-arrow fa-lg" aria-hidden="true" style="color:blue"></i> &ensp; <%=users[i].address%> </a><br><br>
+
+                <form action="/admin-company-list" name="form" method="post">
+                    <input type="hidden" name="email" value="<%=users[i].email%>">
+                    <input type="hidden" name="hiddenStatus" value="<%=users[i].approve%>">
+
+                        <select class="form-control form-control-sm col-sm-2 " name="status" 
+                        onchange="if(confirmation(this.value)) this.form.submit(); else{this.value='pending'; this.form.submit()}; ">
+                        
+                        <option value="pending" selected>Pending</option>
+                        <option value="approved">Approved</option>
+                        <option value="rejected">Rejected</option>
+                        
+                    </select>
+                </form>
+               
+            <%}%>
+        </ul>
+
+          <script>
+          function confirmation(select){
+              if(select=="approved"){
+                if(confirm("Are you sure want to approve this company?"))
+                    return true;
+                else
+                    return false;
+              }
+              else if(select=="rejected"){
+                if(confirm("Are you sure want to reject the company?"))
+                    return true;
+                else
+                    return false;
+              }
+              else{
+                  return true;
+              }}
+              
+          </script>
+          
+
+
+    
+
+</body>
+</html>

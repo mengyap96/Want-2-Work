@@ -1,0 +1,63 @@
+
+  <ul class="nav nav-pills static-top shadow-sm" style= "padding-top: 1%;padding-bottom: 0.5%; margin-left:-5.5%;padding-left:5%; padding-right:5%; margin-right:-5.5%;">
+      <a class="navbar-brand mr-auto text-dark" href="/">
+        <img src="/logo.png" alt="W2W" >
+      </a>
+      <li class="nav-item">
+        <a class="nav-link text-dark" href="/">Home</a>
+      </li>
+      <li class="nav-itemt">
+        <a class="nav-link text-dark" href="/">About</a>
+      </li>
+      <%if(userType=="company"){%>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/post-job">Post a job</a>
+        </li>
+      <%}else if(userType=="user"){%>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/job-list">Search</a>
+        </li>
+      <%}else if(userType=="admin"){%>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/admin-company-list">Approve</a>
+        </li>
+      <%}else{%>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/job-list">Search</a>
+        </li>
+      <%}%>
+      <%if (!name){%>
+      <li class="nav-item">
+        <a class="nav-link active" style="border-radius: 40px; background-color:#4c96d7" href="/login" >Login</a>
+            
+      <%}else{%>
+      <li class="nav-item dropdown"></li>
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
+        style="color:#4c96d7;font-weight: 500;text-transform: uppercase;" href="#" ><i class="fa fa-user" style="color:#4c96d7" aria-hidden="true"></i>&ensp;<%= name%></a>
+        <div class="dropdown-menu shadow-lg" style="border-radius: 5px;" aria-labelledby="navbarDropdown">
+          <%if(userType=="user"){%>
+            <a class="dropdown-item" href="/user-profile/<%=id%>"><i class="fa fa-address-card-o" style="color:#4c96d7" aria-hidden="true"></i>&ensp;&ensp;Profile</a>
+            <a class="dropdown-item" href="/user-job-list"><i class="fa fa-briefcase" style="color:#4c96d7" aria-hidden="true"></i>&ensp;&ensp;Jobs</a>
+            <a class="dropdown-item" href="/user-rating/<%=id%>"><i class="fa fa-star" style="color:#4c96d7" aria-hidden="true"></i>&ensp;&ensp;Rating</a>
+            <%}else if(userType=="company"){%>
+            <a class="dropdown-item" href="/company-profile/<%=id%>"><i class="fa fa-building" style="color:#4c96d7" aria-hidden="true"></i>&ensp;&ensp;Company Profile</a>
+            <a class="dropdown-item" href="/company-job-list"><i class="fa fa-briefcase" style="color:#4c96d7" aria-hidden="true"></i>&ensp;&ensp;Posted Jobs</a>
+            <a class="dropdown-item" href="/user-rating/<%=id%>"><i class="fa fa-star" style="color:#4c96d7" aria-hidden="true"></i>&ensp;&ensp;Rating</a>
+            <%}else if(userType=="admin"){%>
+              <a class="dropdown-item" href="/company-list"><i class="fa fa-building" style="color:#4c96d7" aria-hidden="true"></i>&ensp;&ensp;Company List</a>
+              <a class="dropdown-item" href="/user-list"><i class="fa fa-user" style="color:#4c96d7" aria-hidden="true"></i>&nbsp;&emsp;User List</a>
+              <a class="dropdown-item" href="/job-list"><i class="fa fa-briefcase" style="color:#4c96d7" aria-hidden="true"></i>&ensp;&ensp;Job List</a>
+            <%}%>
+            
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out" style="color:#4c96d7" aria-hidden="true"></i>&ensp;&ensp;Logout</a>
+          </div>
+      <%}%>
+        
+         
+          
+      </li>
+    </ul>
+
+
+

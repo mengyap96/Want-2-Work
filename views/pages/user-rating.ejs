@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../partials/header.ejs %>
+</head>
+<body>
+    <% include ../partials/nav.ejs %>
+    <div class="container">
+     
+      <div class="row mt-1">
+          <div class="col-lg"></div>
+          <div class="col-lg-10">
+              <div class="row justify-content-end my-3 pr-3">
+                  <a  href="/"><i class="fa fa-chevron-circle-left fa-lg" style="color:#4c96d7" aria-hidden="true">&ensp;Back</i></a>        
+              </div>
+          </div>
+          <div class="col-lg"></div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-lg"></div>
+
+
+
+        <div class="list-group mb-5 col-lg-10" >
+
+            <%if(ratings.length==0){%>
+              <a class="list-group-item list-group-item-action  flex-column align-items-start my-1 shadow-sm" style="border-radius: 15px;">
+                
+                <div class="row justify-content-center">
+                    <h1 class="p-1" >No Rating Yet!</h1>
+                    
+                </div>
+              </a>
+              <%}%>
+
+            <%for(i=0;i<ratings.length;i++){%>
+              
+            <div
+              class="list-group-item flex-column align-items-start my-1 shadow-sm" style="border-radius: 15px;">
+                <a style="font-size:40px;color:#4c96d7; text-decoration: none;" href="/job-detail/<%=ratings[i].jobId%>"><%=ratings[i].jobDetail[0].jobTitle%></a><br>
+                
+                <%if(ratings[i].score>4.5){%>
+                  <div class="row mb-4">&emsp;
+                      <span class="fa fa-star fa-2x checked"></span>
+                      <span class="fa fa-star fa-2x checked"></span>
+                      <span class="fa fa-star fa-2x checked"></span>
+                      <span class="fa fa-star fa-2x checked"></span>
+                      <span class="fa fa-star fa-2x checked"></span>
+                  </div>
+                  <%}else if(ratings[i].score>3.5){%>
+                    <div class="row mb-4">&emsp;
+                        <span class="fa fa-star fa-2x checked"></span>
+                        <span class="fa fa-star fa-2x checked"></span>
+                        <span class="fa fa-star fa-2x checked"></span>
+                        <span class="fa fa-star fa-2x checked"></span>
+                        <span class="fa fa-star fa-2x "></span>
+                    </div>
+                  <%}else if(ratings[i].score>2.5){%>
+                    <div class="row mb-4">&emsp;
+                        <span class="fa fa-star fa-2x checked"></span>
+                        <span class="fa fa-star fa-2x checked"></span>
+                        <span class="fa fa-star fa-2x checked"></span>
+                        <span class="fa fa-star fa-2x"></span>
+                        <span class="fa fa-star fa-2x "></span>
+                    </div>
+                  <%}else if(ratings[i].score>1.5){%>
+                    <div class="row mb-4">&emsp;
+                        <span class="fa fa-star fa-2x checked"></span>
+                        <span class="fa fa-star fa-2x checked"></span>
+                        <span class="fa fa-star fa-2x "></span>
+                        <span class="fa fa-star fa-2x "></span>
+                        <span class="fa fa-star fa-2x "></span>
+                    </div>
+                  <%}else if(ratings[i].score>0.5){%>
+                    <div class="row mb-4">&emsp;
+                        <span class="fa fa-star fa-2x checked"></span>
+                        <span class="fa fa-star fa-2x "></span>
+                        <span class="fa fa-star fa-2x "></span>
+                        <span class="fa fa-star fa-2x "></span>
+                        <span class="fa fa-star fa-2x "></span>
+                    </div>
+                  <%}else{%>
+                    <div class="row mb-4">&emsp;
+                        <span class="fa fa-star fa-2x "></span>
+                        <span class="fa fa-star fa-2x "></span>
+                        <span class="fa fa-star fa-2x "></span>
+                        <span class="fa fa-star fa-2x "></span>
+                        <span class="fa fa-star fa-2x "></span>
+                    </div>
+                  <%}%>
+                <a>Comment</a>
+                <a class="form-control"><%=ratings[i].comment%></a>
+    
+    
+              
+            </div>
+            <%}%>
+          </div>
+          <div class="col-lg"></div>
+      </div>
+    </div>
+    <!-- job list -->
+      
+
+
+  </body>
+  </html>
+  

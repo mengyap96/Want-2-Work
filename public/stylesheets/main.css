@@ -1,0 +1,161 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+.jumbotron {
+  background: #532F8C;
+  color: white;
+  padding-bottom: 80px; }
+  .jumbotron .btn-primary {
+    background: #845ac7;
+    border-color: #845ac7; }
+    .jumbotron .btn-primary:hover {
+      background: #7646c1; }
+  .jumbotron p {
+    color: #d9ccee;
+    max-width: 75%;
+    margin: 1em auto 2em; }
+  .navbar + .jumbotron {
+    margin-top: -20px; }
+  .jumbotron .lang-logo {
+    display: block;
+    background: #B01302;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    border: 2px solid white; }
+    .jumbotron .lang-logo img {
+      max-width: 100%; }
+      
+
+
+.float-right{
+  float: right;
+}
+
+.float-left{
+  float: left;
+}
+
+
+nav{
+  overflow: scroll
+}
+
+.float-mid {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+}
+
+a,
+h1 {
+  font-family: 'Arial', Times, serif;
+  font-size: 20px;
+}
+
+h2{
+  font-family: 'Arial', Times, serif;
+  font-size: 40px;
+}
+
+.button {
+  border-radius: 40px; 
+  background-color:#4c96d7"
+}
+
+
+
+#job-list-search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  font-size: 20px;
+  opacity: 1; /* Firefox */
+}
+
+.btn-primary{
+  border-style: solid; 
+  border-radius: 7px; 
+}
+
+.search-bar:focus {
+  box-shadow: 0 0 0 1px royalblue;
+  outline: none;
+}
+
+body{
+  padding-left:5%;
+  padding-right:5%;
+  min-width: 650px;
+}
+
+body{
+  /* Photo by Fabrizio Conti on Unsplash */
+  background-image: url("../background.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: top center;
+}
+
+#login-button {
+  font-family: 'Arial', Times, serif; 
+  font-size:25px; 
+  border-radius: 40px; 
+  border-color:#4c96d7; 
+  background-color:#4c96d7;
+}
+
+#cancel-button{
+  font-family: 'Arial', Times, serif; 
+  font-size:25px; 
+  background-color:lightgrey;
+  color: black;
+  
+}
+
+.checked {
+  color: orange;
+}
+
+
+
+
+
+/****** Style Star Rating Widget *****/
+
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 3px;
+  font-size: 1.5em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: rgb(136, 136, 136); 
+ float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+
+

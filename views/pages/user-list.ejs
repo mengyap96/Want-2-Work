@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../partials/header.ejs %>
+</head>
+<body>
+    <% include ../partials/nav.ejs %>
+
+    <div class="row justify-content-between mt-1">
+        <div class="col-lg-1"></div>
+        <!-- Search bar -->
+        <form class="row justify-content-center col-lg-6 justify-content-md-center my-3" action="/user-list" method="post">
+            <input  class="col-lg-6 form-control search-bar mx-3" type="search" name="key" style="font-size:25px" value="<%=key%>" placeholder="name, email or address">
+
+            <button class=" btn-primary search-bar" type="submit"
+            style="background-color:#4c96d7 ;border-color: #4c96d7;font-size: 25px;">&ensp;Search&ensp;</button>
+        </form>
+        <a class="col-lg-1 pt-4"style="border-color:transparent;" href="/"><i class="fa fa-chevron-circle-left fa-lg" style="color:#4c96d7" aria-hidden="true">Back</i></a>
+    </div>
+
+    <ul class="list-group mb-5 " >
+            
+        <%if(users.length==0){%>
+                <li class="col list-group-item align-items-start my-1 shadow-sm" style="border-radius: 15px;">
+                    
+            <div class="row justify-content-center">
+                    <a style="font-size:40px; color:black; text-decoration:none; " class="mb-1" >No User Yet!</a><br>
+            </div>
+                </li>
+        <%}%>
+
+        
+
+            <%for(i=0;i<users.length;i++){%>
+              
+            <li class="list-group-item align-items-start my-1 shadow-sm" style="border-radius: 15px;">
+                
+                <a style="font-size:40px; color:#4c96d7; text-decoration:none; " href="/user-profile/<%=users[i].email %>" class="mb-1"><%=users[i].name%></a><br>
+                
+                <%if(users[i].rating>4.5){%>
+                    <div class="row">&emsp;
+                        <span class="fa fa-star fa-lg checked"></span>
+                        <span class="fa fa-star fa-lg checked"></span>
+                        <span class="fa fa-star fa-lg checked"></span>
+                        <span class="fa fa-star fa-lg checked"></span>
+                        <span class="fa fa-star fa-lg checked"></span>
+                    </div>
+                    <%}else if(users[i].rating>3.5){%>
+                      <div class="row ">&emsp;
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg "></span>
+                      </div>
+                    <%}else if(users[i].rating>2.5){%>
+                      <div class="row ">&emsp;
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg"></span>
+                          <span class="fa fa-star fa-lg "></span>
+                      </div>
+                    <%}else if(users[i].rating>1.5){%>
+                      <div class="row ">&emsp;
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg "></span>
+                          <span class="fa fa-star fa-lg "></span>
+                          <span class="fa fa-star fa-lg "></span>
+                      </div>
+                    <%}else if(users[i].rating>0.5){%>
+                      <div class="row ">&emsp;
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg "></span>
+                          <span class="fa fa-star fa-lg "></span>
+                          <span class="fa fa-star fa-lg "></span>
+                          <span class="fa fa-star fa-lg "></span>
+                      </div>
+                    <%}else{%>
+                      <div class="row ">&emsp;
+                          <span class="fa fa-star fa-lg "></span>
+                          <span class="fa fa-star fa-lg "></span>
+                          <span class="fa fa-star fa-lg "></span>
+                          <span class="fa fa-star fa-lg "></span>
+                          <span class="fa fa-star fa-lg "></span>
+                      </div>
+                    <%}%>
+
+
+                <a> <i class="fa fa-envelope-o fa-lg" aria-hidden="true" style="color:red"></i> &nbsp; <%=users[i].email%> </a><br>
+                <a> <i class="fa fa-venus-mars fa-lg" aria-hidden="true" style="color:black"></i>&ensp;<%=users[i].gender%> </a><br>
+                <a> <i class="fa fa-phone fa-lg" aria-hidden="true" style="color:green"></i>&ensp;&ensp;<%=users[i].phone%> </a><br>
+                <a> <i class="fa fa-location-arrow fa-lg" aria-hidden="true" style="color:blue"></i> &ensp; <%=users[i].address%> </a><br><br>
+
+
+                
+               
+            <%}%>
+        </ul>
+
+         
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../partials/header.ejs %>
+</head>
+
+<body>
+    <% include ../partials/nav.ejs %>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg"></div>
+
+        <form class="card col-lg-6 shadow-lg my-5 p-5" style="border-radius:15px;" action="/post-button" method="post" onsubmit="if(confirm('Cannot edit job detail after submit!\nAre you sure to post now?')){return checkSpam(this.jobTitle.value,this.jobLocation.value,this.jobCity.value);}else{return false;}">
+          <div class="row justify-content-md-center mb-3">
+              <h2 style="font-size:40px;">Post A Job</h2>
+            </div>
+
+
+          <div class="form-group">
+            <label>Job Title</label><br>
+            <input class="form-control" type="text" name="jobTitle" required>
+          </div>  
+
+          <div class="form-group">
+            <label>Job Description</label><br>
+            <textarea class="form-control" placeholder="eg. job scope, requirements, skills prefered" name="jobDesc" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Salary per hour</label><br>
+            <input class="form-control" type="number" name="jobSalary" required>
+          </div>
+
+          <div class="form-group">
+            <label>Location</label><br>
+            <input class="form-control" type="text" name="jobLocation" required>
+          </div>
+
+        
+
+          <div class="form-group">
+            <label>City</label><br>
+            <input class="form-control" type="text" name="jobCity" >
+                
+          </div>
+
+          <div class="form-group">
+            <label>State</label><br>
+            <select class="form-control " name="jobState">
+              <%var stateList=["Johor","Kedah","Kelantan","Kuala Lumpur","Labuan","Malacca","Negeri Sembilan","Pahang","Penang","Perak","Putrajaya","Sabah","Sarawak","Selangor","Terengganu"];
+                for(i=0;i<stateList.length;i++){ %>
+                  <option  value="<%=stateList[i]%>"><%=stateList[i]%></option>
+               <% } %>
+
+            </select required>
+          </div>
+
+          <div class="form-group">
+            <label>Job Date</label><br>
+            <input type="hidden" name="jobDate">
+            <div class="row justify-content-md-center"> 
+              <div class="col-sm">
+                <input class="form-control" type="date" name="jobStart"  min="<%=dateNow%>" onchange="jobEnd.min=this.value; if(jobEnd.value>this.value){alert('Please repick job end date!'); jobEnd.value=this.value}" required>
+              </div>
+              <a>&rarr;</a>
+              <div class="col-sm">
+                <input class="form-control" type="date" name="jobEnd" min=""  required>
+              </div>
+                
+                
+                
+
+            </div>
+            
+          </div>
+          
+          <div class="form-group">
+            <label>Working Hour</label><br>
+            <div class="row justify-content-md-center">
+              <div class="col-sm">
+                <input class="form-control" type="time" step="600" name="jobTimeStart" onchange="jobTime.value=jobTimeStart.value+' to '+jobTimeEnd.value" required>
+              </div>
+              <a>&rarr;</a>
+              <div class="col-sm">
+                <input class="form-control" type="time" step="600" name="jobTimeEnd" onchange="jobTime.value=jobTimeStart.value+' to '+jobTimeEnd.value;" required>
+              </div>
+            </div>
+            
+            <input type="hidden" name="jobTime" value="">
+
+          </div> 
+
+          <div class="row mt-2">
+              <div class="col-md"></div>
+            <div class="col-md text-center">
+                <button class="form-control btn-primary m-2 px-4 py-2" style="font-family: 'Times New Roman', Times, serif; font-size:25px; border-radius: 40px; border-color:#4c96d7; background-color:#4c96d7" type="submit" >Post</button>
+            </div>
+            <div class="col-md text-center">
+                <a href="/" class="btn form-control m-2 px-4 py-2" id="cancel-button" type="submit" >Cancel</a>
+            </div>
+            <div class="col-md"></div>
+          </div>
+          
+        </form>
+
+        <div class="col-lg"></div>
+      </div>
+    </div>
+   
+
+    <script>
+      function checkSpam(title,location,city){
+        if(Number.isInteger(Number(title))){
+          alert('Job Title cannot be number only!');
+          return false;
+          }else if(Number.isInteger(Number(location))){
+            alert('Job Location cannot be number only!');
+            return false;
+          }else if(Number.isInteger(Number(city))){
+            alert('Job City cannot be number only!')
+            return false;
+          }
+          else{
+            return true;
+          }}
+    </script>
+
+</body>
+</html>
+

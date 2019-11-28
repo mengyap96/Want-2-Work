@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+  <% include ../partials/nav.ejs %>
+  <h1><%= jobs[0].jobTitle %></h1>
+  <h1><%= jobs[0].companyDetail[0].companyName %></h1>
+  <h1>Job Description</h1>
+  <h2><%= jobs[0].jobDesc %></h2>
+  <h1>Loaction</h1>
+  <h2><%= jobs[0].jobLocation %></h2>
+  <h1>Salary</h1>
+  <h2><%= jobs[0].jobSalary %> per hour</h2>
+  <h1>Date</h1>
+  <h2><%=jobStart%> to <%=jobEnd%></h2>
+  <h1>Time</h1>
+  <h2><%= jobs[0].jobTime %> per hour</h2>
+  
+  <form action="/apply-job/<%=jobs[0].jobId%>" method="post" onsubmit="return applyJob()">   
+    <button type="submit">Apply</button>
+  </form>
+
+  <script>
+  function applyJob(){
+    if(confirm("Apply the job?")){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  </script>
+</body>
+</html>

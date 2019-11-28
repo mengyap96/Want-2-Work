@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+  <% include ../partials/nav.ejs %>
+  <script>
+    function getRating(input){
+      
+      document.myForm.score.value=input;
+    }
+  </script>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg"></div>
+    
+
+
+      <form class="card col-lg-6 shadow-lg mt-5 p-5" style="border-radius:10px" action="/rate-<%=buffer%>?e=<%=email%>&j=<%=jobId%>" name="myForm" method="post" onsubmit="if(!this.score.value){alert('Please choose the star for rating!');return false;} return confirmation();">
+        <input type="hidden" name="score" required />
+        
+        <div class="form-group row" style="margin-bottom: -0.5rem;">
+            
+            <label ><b>Rating</b></label>
+
+          </div> 
+    
+        <div class="row" style="margin-bottom: 0.5rem;">
+            <fieldset class="rating ">
+                <input type="radio" id="star5" name="rating" value="5" onclick="getRating(this.value);" />
+                <label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                
+                <input type="radio" id="star4half" name="rating" value="4.5" onclick="getRating(this.value);" />
+                <label class="half" for="star4half" title="Excellent - 4.5 stars"></label>
+                
+                <input type="radio" id="star4" name="rating" value="4" onclick="getRating(this.value);"/>
+                <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                
+                <input type="radio" id="star3half" name="rating" value="3.5" onclick="getRating(this.value);"/>
+                <label class="half" for="star3half" title="Good - 3.5 stars"></label>
+                
+                <input type="radio" id="star3" name="rating" value="3" onclick="getRating(this.value);"/>
+                <label class = "full" for="star3" title="Average - 3 stars"></label>
+                
+                <input type="radio" id="star2half" name="rating" value="2.5" onclick="getRating(this.value);"/>
+                <label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                
+                <input type="radio" id="star2" name="rating" value="2" onclick="getRating(this.value);"/>
+                <label class = "full" for="star2" title="Bad! - 2 stars"></label>
+                
+                <input type="radio" id="star1half" name="rating" value="1.5" onclick="getRating(this.value);"/>
+                <label class="half" for="star1half" title="Bad! - 1.5 stars"></label>
+                
+                <input type="radio" id="star1" name="rating" value="1" onclick="getRating(this.value);"/>
+                <label class = "full" for="star1" title="Very bad! - 1 star"></label>
+                
+                <input type="radio" id="starhalf" name="rating" value="0.5" onclick="getRating(this.value);"/>
+                <label class="half" for="starhalf" title="Very bad! - 0.5 stars"></label>
+            </fieldset>
+        </div>
+          
+        <div class="form-group row">
+            <label><b>Review & Comment</b></label>
+            <textarea class="form-control" name="comment" placeholder="Write down your review & comment here..."></textarea>
+          </div> 
+          
+
+        <div class="row mt-5">
+            <div class="col-md"></div>
+            <div class="col-md text-center">
+                <button  class="form-control btn-primary px-4 py-2 m-2" id="login-button" type="submit" >Submit</button>
+            </div>
+            <div class="col-md text-center">
+                <a href="/user-job-list" class="form-control btn-primary px-4 py-2 m-2" id="cancel-button"  type="submit" >Cancel</a>
+            </div>
+            <div class="col-md"></div>
+        </div>
+      
+      </form>
+      <div class="col-lg"></div>
+    </div>
+  </div>  
+
+
+  <script>
+    function confirmation(){
+          if(confirm("Rating are non-editable! Are you sure to submit now?"))
+            return true;
+          else
+            return false;
+    }
+    </script>
+</body>
+
+</html>

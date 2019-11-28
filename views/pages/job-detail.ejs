@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+  <% include ../partials/nav.ejs %>
+
+  
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg"></div>
+      <div class="shadow-lg card col-lg-6 p-5 my-5" style="border-radius: 15px;">
+        <div class="row justify-content-end">
+        <button class="col-1 btn btn-outline-dark" style="border-color:white;" onclick="window.history.back()"><i class="fa fa-times" aria-hidden="true"></i></button>
+        </div>
+    
+        <div class="row justify-content-md-center">
+            <h1><strong> <%= jobs[0].jobTitle %> </strong></h1>
+        </div>
+        <div class="row justify-content-md-center">
+            <a href="/company-profile/<%=jobs[0].companyDetail[0].email%>" style="color:#4c96d7;"> <%= jobs[0].companyDetail[0].name %></a>
+        </div>
+        <%if(jobs[0].companyDetail[0].rating>4.5){%>=
+          <div class="row justify-content-md-center mb-4">
+              <span class="fa fa-star  checked"></span>
+              <span class="fa fa-star  checked"></span>
+              <span class="fa fa-star  checked"></span>
+              <span class="fa fa-star  checked"></span>
+              <span class="fa fa-star  checked"></span>
+          </div>
+          <%}else if(jobs[0].companyDetail[0].rating>3.5){%>
+            <div class="row justify-content-md-center mb-4">
+                <span class="fa fa-star  checked"></span>
+                <span class="fa fa-star  checked"></span>
+                <span class="fa fa-star  checked"></span>
+                <span class="fa fa-star  checked"></span>
+                <span class="fa fa-star  "></span>
+            </div>
+          <%}else if(jobs[0].companyDetail[0].rating>2.5){%>
+            <div class="row justify-content-md-center mb-4">
+                <span class="fa fa-star  checked"></span>
+                <span class="fa fa-star  checked"></span>
+                <span class="fa fa-star  checked"></span>
+                <span class="fa fa-star "></span>
+                <span class="fa fa-star  "></span>
+            </div>
+          <%}else if(jobs[0].companyDetail[0].rating>1.5){%>
+            <div class="row justify-content-md-center mb-4">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star  checked"></span>
+                <span class="fa fa-star "></span>
+                <span class="fa fa-star  "></span>
+                <span class="fa fa-star  "></span>
+            </div>
+          <%}else if(jobs[0].companyDetail[0].rating>0.5){%>
+            <div class="row justify-content-md-center mb-4">
+                <span class="fa fa-star  checked"></span>
+                <span class="fa fa-star  "></span>
+                <span class="fa fa-star  "></span>
+                <span class="fa fa-star  "></span>
+                <span class="fa fa-star  "></span>
+            </div>
+          <%}else{%>
+            <div class="row justify-content-md-center mb-4">
+                <span class="fa fa-star  "></span>
+                <span class="fa fa-star  "></span>
+                <span class="fa fa-star  "></span>
+                <span class="fa fa-star  "></span>
+                <span class="fa fa-star  "></span>
+            </div>
+          <%}%>
+          <div class="form-group">
+            <label><Strong>Job Description</Strong></label>
+            <textarea class="form-control" ><%= jobs[0].jobDesc %></textarea>
+          </div>
+
+          <div class="form-group">
+            <label><Strong>Job Location</Strong></label>
+            <p class="form-control"><%= jobs[0].jobLocation %>, <%= jobs[0].jobCity %>, <%= jobs[0].jobState %>.</p>
+          </div>
+
+          <div class="form-group">
+            <label><Strong>Job Salary</Strong></label>
+            <p class="form-control"><%= jobs[0].jobSalary %> per hour</p>
+          </div>
+
+          <div class="form-group">
+            <label><Strong>Job Date</Strong></label>
+            <p class="form-control"><%= jobDate %></p>
+          </div>
+         
+          <div class="form-group">
+            <label><Strong>Job Time</Strong></label>
+            <p class="form-control"><%= jobs[0].jobTime %></p>
+          </div>
+
+          <div class="row justify-content-md-center">
+              <%x=true;%>
+              <%for(i=0;i<jobs[0].candidateEmail.length;i++){%>
+                <%if(jobs[0].candidateEmail[i]==id){%>
+                  <%x=false;%>
+                  <%}}%>
+                <% if(userType=="user"&&x==true){ %>
+              <form action="/apply-job/<%=jobs[0].jobId%>" method="post" onsubmit="return applyJob()">   
+                <button class="btn btn-primary" style="border-radius: 40px; background-color:#4c96d7; border-color:#4c96d7; font-size: 25px" type="submit">Apply</button>
+              </form>
+              <% } %>
+          </div>
+
+      </div>
+      <div class="col-lg"></div>
+    </div>
+  </div>
+
+ 
+  
+
+  <script>
+  function applyJob(){
+    if(confirm("Apply the job?")){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  </script>
+</body>
+</html>

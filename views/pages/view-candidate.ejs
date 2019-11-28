@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../partials/header.ejs %>
+</head>
+<body>
+    <% include ../partials/nav.ejs %>
+
+    <div class="row justify-content-end my-3">
+        <a class="col-1" href="/company-job-list"><i class="fa fa-chevron-circle-left fa-lg" style="color:#4c96d7" aria-hidden="true">Back</i></a>
+
+    </div>
+    <ul class="list-group mb-5 " >
+            
+
+            <%for(i=0;i<jobs[0].candidateEmail.length;i++){%>
+              
+            <li class="list-group-item align-items-start my-1 shadow-sm" style="border-radius: 15px;">
+                
+                <a  href="/user-profile/<%=jobs[0].userDetail[i].email %>" class="mb-1" style="font-size:40px; color:#4c96d7; text-decoration: none;"><%=jobs[0].userDetail[i].name%></a>
+                
+                
+                <%if(jobs[0].userDetail[i].rating>4.5){%>
+                    <div class="row">&emsp;
+                        <span class="fa fa-star fa-lg checked"></span>
+                        <span class="fa fa-star fa-lg checked"></span>
+                        <span class="fa fa-star fa-lg checked"></span>
+                        <span class="fa fa-star fa-lg checked"></span>
+                        <span class="fa fa-star fa-lg checked"></span>
+                    </div>
+                    <%}else if(jobs[0].userDetail[i].rating>3.5){%>
+                      <div class="row ">&emsp;
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg "></span>
+                      </div>
+                    <%}else if(jobs[0].userDetail[i].rating>2.5){%>
+                      <div class="row ">&emsp;
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg"></span>
+                          <span class="fa fa-star fa-lg "></span>
+                      </div>
+                    <%}else if(jobs[0].userDetail[i].rating>1.5){%>
+                      <div class="row ">&emsp;
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg "></span>
+                          <span class="fa fa-star fa-lg "></span>
+                          <span class="fa fa-star fa-lg "></span>
+                      </div>
+                    <%}else if(jobs[0].userDetail[i].rating>0.5){%>
+                      <div class="row ">&emsp;
+                          <span class="fa fa-star fa-lg checked"></span>
+                          <span class="fa fa-star fa-lg "></span>
+                          <span class="fa fa-star fa-lg "></span>
+                          <span class="fa fa-star fa-lg "></span>
+                          <span class="fa fa-star fa-lg "></span>
+                      </div>
+                    <%}else{%>
+                      <div class="row ">&emsp;
+                          <span class="fa fa-star fa-lg "></span>
+                          <span class="fa fa-star fa-lg "></span>
+                          <span class="fa fa-star fa-lg "></span>
+                          <span class="fa fa-star fa-lg "></span>
+                          <span class="fa fa-star fa-lg "></span>
+                      </div>
+                    <%}%>
+                    
+                <p class="mb-1">Working Experience: <%=jobs[0].userDetail[i].experience.length%></p>
+                <form action="/view-candidate/<%=jobs[0].jobId%>" name="form" method="post">
+                    <input type="hidden" name="email" value="<%=jobs[0].userDetail[i].email%>">
+
+                    <%for(j=0;j<jobs[0].candidateEmail.length;j++){
+                        if(jobs[0].jobStatus[j].candidateEmail==jobs[0].userDetail[i].email){
+                            statusvalue=jobs[0].jobStatus[j].status
+                            ratedcandicatevalue=jobs[0].jobStatus[j].ratedCandidate
+                        }}
+                        %>
+                        
+                    <input type="hidden" name="hiddenStatus" value="<%=statusvalue%>">
+
+                    <%if(statusvalue=="Finished"){%>
+                        <select disabled class="form-control form-control-sm col-sm-2 " name="status" 
+                        onchange="if(confirmation(this.value)) this.form.submit(); else{this.value=hiddenStatus.value; this.form.submit()}; ">
+                    <%}else{%>
+                        <select class="form-control form-control-sm col-sm-2 " name="status" 
+                        onchange="if(confirmation(this.value)) this.form.submit(); else{this.value=hiddenStatus.value; this.form.submit()}; ">
+                        <%}%>
+
+                        <%if(statusvalue=="Pending"){%>
+                        <option value="Pending" selected>Pending</option>
+                        <option value="Interview">Interview</option>
+                        <option value="Accepted">Accepted</option>
+                        <option value="Rejected">Rejected</option>
+                        
+                        <%}else if(statusvalue=="Interview"){%>
+                        <option value="Interview" selected>Interview</option>
+                        <option value="Accepted">Accepted</option>
+                        <option value="Rejected">Rejected</option>
+                        
+                        <%}else if(statusvalue=="Accepted"){%>
+                        <option value="Accepted" selected>Accepted</option>
+                        <option value="Finished">Finsihed</option>
+
+                        <%}else if(statusvalue=="Finished"){%>
+                        <option value="Finished" selected>Finsihed</option>
+
+                        <%}else if(statusvalue=="Rejected"){%>
+                        <option value="Interview">Interview</option>
+                        <option value="Accepted">Accepted</option>
+                        <option value="Rejected" selected>Rejected</option>
+                        <%}%>
+                    </select>
+                </form>
+                <%if((statusvalue=="Finished")&&(ratedcandicatevalue==false)){%>
+                    <a href="/rate-candidate?e=<%=jobs[0].userDetail[i].email%>&j=<%=jobs[0].jobId%>"><i class="fa fa-check" aria-hidden="true">&ensp;</i>Rate the candidate!</a><%}%>
+                </li>
+            <%}%>
+        </ul>
+
+          <script>
+          function confirmation(select){
+              if(select=="Accepted"){
+                if(confirm("Are you sure want to hire this candidate?"))
+                    return true;
+                else
+                    return false;
+              }
+              else if(select=="Finished"){
+                if(confirm("Are you sure want to finish the job?"))
+                    return true;
+                else
+                    return false;
+              }
+              else{
+                  return true;
+              }}
+              
+          </script>
+          
+
+
+    
+
+</body>
+</html>
