@@ -26,7 +26,7 @@
     "nodemon": "^1.19.4",
     "path": "^0.12.7",
     "req-flash": "0.0.3",
-    "validator": "^12.0.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "request": "^2.81.0",
